@@ -17,9 +17,7 @@ public class HeapSort {
 
     public static void main(String[] args) {
         int[] nums = {9,3,8,4,2,5,1,3,5,6,7,11};
-//        int[] nums = {10, 1, 2, 11, 0};
         HeapSort obj = new HeapSort();
-//        obj.buildMaxHeap(nums, nums.length);
         obj.sort(nums);
         Utils.print(nums);
     }
@@ -28,7 +26,7 @@ public class HeapSort {
         int len = arr.length;
         // 构建最大堆
         buildMaxHeap(arr, len); // n * log(n)
-        // 排序 最无序节点与根节点交换值 n * log(n)
+        // 排序 最大索引的无序节点与根节点交换值 n * log(n)
         for (int i = len - 1; i > 0; i --) {
             swap(arr, 0, i);
             len --;
@@ -55,7 +53,7 @@ public class HeapSort {
         }
         if (largest != i) {
             swap(arr, i, largest);
-            // 由于larget(left or right)的值改变了，所有需要向下遍历
+            // 由于larget(left or right)的值改变了，所以需要向下遍历
             heapify(arr, largest, len);
         }
     }
