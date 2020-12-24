@@ -30,28 +30,34 @@ public class ReverseBetween {
     }
 
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        // 递归
         if (m >= n) {
             return head;
         }
         ListNode dump = new ListNode(0);
         dump.next = head;
-        dc(dump, m, n, 0);
+
+        ListNode p = dump.next, pre = dump;
+        int order = 1;
+        while (p != null && p.next != null) {
+           if (order < m) {
+               pre = p;
+               p = p.next;
+               order ++;
+               continue;
+           }
+
+           if (order > n - 1) {
+               break;
+           }
+
+           ListNode temp = p.next;
+           p.next = p.next.next;
+           temp.next = pre.next;
+           pre.next = temp;
+           order ++;
+        }
+
         return dump.next;
-    }
-
-    private ListNode dc(ListNode head, int m, int n, int order) {
-        if (order == n) {
-            return head;
-        }
-        ListNode mh = dc(head.next, m, n, order + 1);
-        if (order < m) {
-            return head;
-        } else {
-            ListNode tail = mh;
-
-            return mh;
-        }
     }
 
 }
